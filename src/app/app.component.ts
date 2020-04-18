@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -7,18 +7,18 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  genders = ['male', 'female'];
-  signnupForm: FormGroup;
+  genders = ['male', 'female', 'non-binary', 'do not wish to disclose'];
+  signupForm: FormGroup;
 
   ngOnInit() {
-    this.signnupForm = new FormGroup({
-      'username': new FormControl(null),
-      'email': new FormControl(null),
+    this.signupForm = new FormGroup({
+      'username': new FormControl(null, Validators.required),
+      'email': new FormControl(null, [Validators.required, Validators.email]),
       'gender': new FormControl('female')
     });
   }
 
   onSubmit() {
-    console.log(this.signnupForm);
+    console.log(this.signupForm);
   }
 }
